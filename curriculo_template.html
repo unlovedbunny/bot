@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currículo</title>
+    <style>
+        /* ================================================================
+           ALTA-TYPST INSPIRED CV TEMPLATE
+           Replicated from: github.com/GeorgeHoneywood/alta-typst
+           ================================================================ */
+
+        @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap');
+
+        :root {
+            --color-accent: #3d2b6b;       /* Deep purple accent */
+            --color-accent-light: #4a3580;
+            --color-heading: #2d1b5e;
+            --color-text: #333333;
+            --color-text-muted: #666666;
+            --color-text-light: #999999;
+            --color-dot-filled: #3d2b6b;
+            --color-dot-empty: #d0d0d0;
+            --color-divider: #3d2b6b;
+            --color-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Lato', 'Segoe UI', Arial, sans-serif;
+            font-size: 9pt;
+            color: var(--color-text);
+            background: var(--color-bg);
+            line-height: 1.35;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm 18mm 12mm 18mm;
+            margin: 0 auto;
+        }
+
+        /* ---- HEADER ---- */
+        .header {
+            margin-bottom: 6mm;
+        }
+
+        .header h1 {
+            font-size: 22pt;
+            font-weight: 900;
+            color: var(--color-text);
+            margin-bottom: 3mm;
+            letter-spacing: -0.3px;
+        }
+
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 3mm;
+            font-size: 8.5pt;
+            color: var(--color-text-muted);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .contact-item .icon {
+            width: 12px;
+            height: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-item .icon svg {
+            width: 12px;
+            height: 12px;
+            fill: var(--color-text-muted);
+        }
+
+        .header .tagline {
+            font-size: 9.5pt;
+            color: var(--color-text);
+            line-height: 1.4;
+        }
+
+        /* ---- TWO-COLUMN LAYOUT ---- */
+        .columns {
+            display: flex;
+            gap: 8mm;
+        }
+
+        .col-left {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .col-right {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* ---- SECTION HEADINGS ---- */
+        .section-title {
+            font-size: 11pt;
+            font-weight: 700;
+            color: var(--color-heading);
+            text-transform: capitalize;
+            border-bottom: 2px solid var(--color-divider);
+            padding-bottom: 1.5mm;
+            margin-bottom: 3mm;
+            margin-top: 4mm;
+        }
+
+        .section-title:first-child {
+            margin-top: 0;
+        }
+
+        /* ---- EXPERIENCE / JOB ENTRIES ---- */
+        .entry {
+            margin-bottom: 4mm;
+        }
+
+        .entry-header {
+            margin-bottom: 1mm;
+        }
+
+        .entry-title {
+            font-size: 10pt;
+            font-weight: 700;
+            color: var(--color-text);
+        }
+
+        .entry-subtitle {
+            font-size: 9pt;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--color-accent);
+        }
+
+        .entry-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 8pt;
+            color: var(--color-text-muted);
+            margin-bottom: 1.5mm;
+        }
+
+        .entry-meta .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .entry-meta .meta-item svg {
+            width: 10px;
+            height: 10px;
+            fill: var(--color-text-muted);
+        }
+
+        .entry-body ul {
+            padding-left: 4mm;
+            margin: 0;
+        }
+
+        .entry-body ul li {
+            margin-bottom: 0.5mm;
+            font-size: 8.5pt;
+            line-height: 1.4;
+            color: var(--color-text);
+        }
+
+        .entry-body p {
+            font-size: 8.5pt;
+            line-height: 1.4;
+            color: var(--color-text);
+        }
+
+        .entry-note {
+            font-size: 8pt;
+            font-style: italic;
+            color: var(--color-text-light);
+            margin-top: 1mm;
+        }
+
+        /* ---- SKILLS WITH DOT RATING ---- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2mm 6mm;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .skill-name {
+            font-size: 8.5pt;
+            color: var(--color-text);
+        }
+
+        .skill-dots {
+            display: flex;
+            gap: 3px;
+        }
+
+        .skill-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--color-dot-empty);
+        }
+
+        .skill-dot.filled {
+            background-color: var(--color-dot-filled);
+        }
+
+        .skill-dot.half {
+            background: linear-gradient(90deg, var(--color-dot-filled) 50%, var(--color-dot-empty) 50%);
+        }
+
+        /* ---- INTERESTS / SIMPLE LIST ---- */
+        .simple-list {
+            padding-left: 4mm;
+        }
+
+        .simple-list li {
+            font-size: 8.5pt;
+            color: var(--color-text);
+            margin-bottom: 0.5mm;
+            line-height: 1.4;
+        }
+
+        /* ---- PROJECTS ENTRIES ---- */
+        .project-entry {
+            margin-bottom: 3mm;
+        }
+
+        .project-entry .project-name {
+            font-size: 9.5pt;
+            font-weight: 700;
+            color: var(--color-accent);
+        }
+
+        .project-entry .project-desc {
+            font-size: 8.5pt;
+            color: var(--color-text);
+            line-height: 1.4;
+        }
+
+        /* ---- UTILITY ---- */
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        /* ---- PRINT ---- */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .page {
+                padding: 12mm 15mm 10mm 15mm;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- ============================================================ -->
+        <!-- HEADER                                                        -->
+        <!-- ============================================================ -->
+        <div class="header">
+            <h1>{{NOME_COMPLETO}}</h1>
+
+            <div class="contact-row">
+                <span class="contact-item">
+                    <span class="icon">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    </span>
+                    {{EMAIL}}
+                </span>
+                <span class="contact-item">
+                    <span class="icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                    </span>
+                    {{LOCALIZACAO}}
+                </span>
+                <span class="contact-item">
+                    <span class="icon">
+                        <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    </span>
+                    {{TELEFONE}}
+                </span>
+                <span class="contact-item">
+                    <span class="icon">
+                        <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                    </span>
+                    {{LINKEDIN_URL}}
+                </span>
+            </div>
+
+            <p class="tagline">{{RESUMO_IA}}</p>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- TWO COLUMNS                                                   -->
+        <!-- ============================================================ -->
+        <div class="columns">
+            <!-- LEFT COLUMN -->
+            <div class="col-left">
+                <h2 class="section-title">Experiência</h2>
+                {{EXPERIENCIAS}}
+
+                <h2 class="section-title">Formação Acadêmica</h2>
+                {{EDUCACAO}}
+
+                <h2 class="section-title">Idiomas</h2>
+                {{IDIOMAS}}
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div class="col-right">
+                <h2 class="section-title">Projetos</h2>
+                {{PROJETOS}}
+
+                <h2 class="section-title">Habilidades</h2>
+                <div class="skills-grid">
+                    {{SKILLS}}
+                </div>
+
+                <h2 class="section-title">Certificações</h2>
+                {{CERTIFICACOES}}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
